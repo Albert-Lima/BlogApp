@@ -1,0 +1,131 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+:root{
+    --cor-DarkBase: #000000;
+    --cor-LightLetters: #FFFFFF;
+    --cor-DarkTitle: #808080;
+    --cor-DarkParag: #575757;
+    --cor-SoftBase: #D9D9D9;
+    --cor-UltraSoftBase: #F2F2F2;
+    --cor-BlueMedium: #000042;
+    --cor-BlueLight: #000063;
+    --fontBase: "Roboto", sans-serif;
+}
+.BolsaBox{
+    height: 40px;
+    width: 800px;
+    background-color: var(--cor-SoftBase);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    font-family: var(--fontBase);
+    font-weight: 700;
+    font-size: 10pt;
+}
+.BoxLogo{
+    height: 200px;
+    width: 800px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.Logo{
+    font-family: var(--fontBase);
+    font-size: 30pt;
+    font-weight: 700;
+    color: var(--cor-BlueMedium);
+    width: 40%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.linhaVerticalLogo{
+    width: 2px;
+    height: 150px;
+    background-color: black;
+}
+.LogoMarca{
+    font-family: var(--fontBase);
+    font-size: 10pt;
+    font-weight: 800;
+    color: var(--cor-BlueMedium);
+    width: 40%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.Title{
+    font-family: var(--fontBase);
+    color: #000063;
+    font-size: 12pt;
+    font-weight: 800;
+    margin-left: -725px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.BoxNotícias{
+    margin-bottom: 30px;
+    width: 800px;
+    height: 350px;
+    background-color: var(--cor-UltraSoftBase);
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 280px 430px;
+    grid-template-rows: 280px max-content;
+    column-gap: 20px;
+    row-gap: 40px;
+}
+.ImgPost{
+    background: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+}
+.PostInfo{
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding: 20px;
+    gap: 10px;
+    justify-content: start;
+    margin-top: 30px;
+}
+.PostInfo h3{
+    font-family: var(--fontBase);
+    color: var(--cor-DarkBase);
+    font-size: 12pt;
+}
+.PostInfo p{
+    font-family: var(--fontBase);
+    color: var(--cor-DarkTitle);
+    font-size: 10pt;
+    font-weight: 500;
+}
+.ButtonBox{
+    width: 730px;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.Button-see-more{
+    background-color: transparent;
+    color: black;
+    font-family: var(--fontBase);
+    font-size: 10pt;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+}

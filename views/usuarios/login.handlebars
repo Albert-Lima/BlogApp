@@ -1,0 +1,38 @@
+<nav class="BarNav">
+    <div class="NavPage">
+        <a href="/" class="NoSelected">Página inicial</a>
+        <a href="" class="NoSelected">Calculadora</a>
+    </div>
+    <div class="NavSocial">
+        <a href="#" class="iconSocial"><img src="/css/img/btt-instagram.png" alt=""></a>
+        <a href="#" class="iconSocial"><img src="/css/img/icon_facebook.png" alt=""></a>
+        <a href="#" class="iconSocial"><img src="/css/img/twitter.png" alt=""></a>
+    </div>
+</nav>
+<!-- mensagens de erro aparecerão aqui -->
+{{#if error}}
+    <div class="ErrorMSG">
+        {{error}}
+    </div>
+{{else}}
+{{/if}}
+{{>_msg}}
+{{#each erros}}
+    <div class="ErrorMSG">
+        {{texto}}
+    </div>
+{{else}}
+{{/each}}
+
+
+<section class="Container-form">
+    <form method="post" action="/user/login" class="formCategoria">
+        <label for="email">email</label>
+        <input type="email" name="email" id="" required>
+
+        <label for="senha">senha</label>
+        <input type="password" name="senha" required>
+
+        <button type="submit">login</button>
+    </form>
+</section>
