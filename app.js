@@ -1,7 +1,6 @@
 const express = require('express')
 const app = express()
 
-
 //CONFIGURAÇÕES
    //HANDLEBARS
       const handlebars = require('express-handlebars')
@@ -118,8 +117,7 @@ const app = express()
       })
    })
 
-   
-const port = process.env.PORT || 3001
+const port = process.env.PORT || 8081
 app.listen(port, ()=>{
    console.log('servidor rodando perfeitamente')
 })

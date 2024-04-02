@@ -64,8 +64,15 @@ router.post("/cadastro", (req, res)=>{
                         }else{
                             novoUsuario.senha = hash
                             novoUsuario.save().then(()=>{
+                                console.log("cadastro realizado")
                                 req.flash("success_msg", "usuário cadastrado")
-                                res.redirect("/")
+                                req.login(usuario, err => {
+                                    if (err) {
+                                        console.error(err);
+                                        return next(err);
+                                    }
+                                    return res.redirect('/'); // Redirecionar para a página de logado
+                                });
                             }).catch((err)=>{
                                 req.flash("error_msg","houve um erro ao criar novo usuário")
                                 res.redirect("/cadastro")

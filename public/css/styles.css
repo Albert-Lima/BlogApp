@@ -74,7 +74,7 @@ footer{
     height: 350px;
     background-color: black;
     display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 100%;
     grid-template-rows: 300px 50px;
 }
 .Container-form{
@@ -89,43 +89,6 @@ footer{
     align-items: start;
     justify-content: center;
 }
-.TitleForm{
-    font-family: var(--fontBase);
-    color: var(--cor-LightLetters);
-    font-size: 12pt;
-}
-.LabelFooter{
-    color: var(--cor-LightLetters);
-    font-family: var(--fontBase);
-    font-size: 10pt;
-    font-weight: 500;
-    margin-top: 20px;
-}
-.InputFooter{
-    background: none;
-    border: none;
-    border-bottom: 1px solid white;
-    margin-top: 10px;
-    font-family: var(--fontBase);
-    color: var(--cor-DarkTitle);
-    font-size: 9pt;
-    font-weight: 600;
-    outline: none;
-}
-.SubmitFooter{
-    background-color: var(--cor-BlueMedium);
-    border: none;
-    outline: none;
-    height: 30px;
-    width: 100px;
-    color: white;
-    font-family: var(--fontBase);
-    font-size: 10pt;
-    font-weight: 500;
-    margin-top: 10px;
-    cursor: pointer;
-}
-
 .ContainerRedirect{
     display: flex;
     flex-direction: column;
@@ -135,7 +98,7 @@ footer{
 }
 #container-direitos{
     margin-top: 20px;
-    width: 200%;
+    width: 100%;
 }
 #Direitos{
     text-align: center;
