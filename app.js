@@ -65,7 +65,7 @@ const app = express()
          res.render("index", {postagens: postagens})
       }).catch((err)=>{
          req.flash("error_msg", "houve um erro interno")
-         res.redirect("/")
+         res.redirect("/404")
       })
    })
    app.get("/404", (req, res)=>{
