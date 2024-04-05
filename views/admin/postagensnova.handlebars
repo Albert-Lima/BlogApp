@@ -5,7 +5,9 @@
 {{/each}}
 <div class="BoxNewPost">
     <h4>nova postagem:</h4>
-    <form action="/admin/postagens/nova" method="post">
+    <form action="/admin/postagens/nova" method="post" enctype="multipart/form-data">
+        <label for="imagem">Capa</label>
+        <input type="file" name="imagem" id="">
         <label for="titulo" class="labelFor">titulo:</label>
         <input type="text" name="titulo">
         <label for="slug" class="labelFor">slug:</label>

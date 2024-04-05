@@ -58,20 +58,21 @@ const app = express()
    const admin = require('./routes/admin')
    app.use('/admin', admin)
 
-   require("./modules/postagem")
-   const Postagens = mongoose.model("postagens")
-   app.get("/", (req, res)=>{
-      Postagens.find().populate().sort({data: "desc"}).lean().then((postagens)=>{
-         res.render("index", {postagens: postagens})
-      }).catch((err)=>{
-         req.flash("error_msg", "houve um erro interno")
-         res.redirect("/404")
-      })
-   })
-   app.get("/404", (req, res)=>{
-      res.send("erro 404")
-   })
-
+      //rota princial de toda a aplicação
+         require("./modules/postagem")
+         const Postagens = mongoose.model("postagens")
+         app.get("/", (req, res)=>{
+            Postagens.find().populate().sort({data: "desc"}).lean().then((postagens)=>{
+               res.render("index", {postagens: postagens})
+            }).catch((err)=>{
+               req.flash("error_msg", "houve um erro interno")
+               res.redirect("/404")
+            })
+         })
+         app.get("/404", (req, res)=>{
+            res.send("erro 404")
+         })
+         
    app.get("/postagem/:slug", (req, res)=>{
       Postagens.findOne({slug: req.params.slug}).lean().then((postagens)=>{
          if(postagens){

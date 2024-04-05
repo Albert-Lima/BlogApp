@@ -1,23 +1,13 @@
-<nav class="BarNav">
-    <div class="NavPage">
-        <a href="/" class="NoSelected">Página inicial</a>
-        <a href="" class="NoSelected">Calculadora</a>
-    </div>
-    <div class="NavSocial">
-        <a href="#" class="iconSocial"><img src="/css/img/btt-instagram.png" alt=""></a>
-        <a href="#" class="iconSocial"><img src="/css/img/icon_facebook.png" alt=""></a>
-        <a href="#" class="iconSocial"><img src="/css/img/twitter.png" alt=""></a>
-    </div>
-</nav>
-{{>_msg}}
+{{>_navbarglobal}}
 {{#each erros}}
     <div class="ErrorMSG">
         {{texto}}
     </div>
 {{else}}
 {{/each}}
+{{>_msg}}
 
-<section class="Container-form">
+<section class="Container-form" style="margin-top: 100px;">
     <h3>crie sua conta:</h3>
     <form action="" method="post" class="formCategoria">
         <label for="nome">nome</label>
@@ -35,3 +25,4 @@
         <button type="submit">criar</button>
     </form>
 </section>
+<script src=""></script>

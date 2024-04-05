@@ -2,15 +2,16 @@ const express = require('express')
 const router = express.Router()
 const mongoose = require("mongoose")
 const bcrypt = require("bcryptjs")
+
 //recebendo model de usuários
 require("../modules/usuarios")
 const Usuarios = mongoose.model("usuarios")
+
 //recebendo model de postagens
 require("../modules/postagem")
 const Postagens = mongoose.model("usuarios")
-//recebendo os helpers:
 
-
+//rota principal após login como usuário
 router.get("/", (req, res)=>{
     Postagens.find().populate().sort({data: "desc"}).lean().then((postagens)=>{
         res.render("usuarios/home", {postagens: postagens})
@@ -19,6 +20,13 @@ router.get("/", (req, res)=>{
         res.redirect("/404")
      })
 })
+
+//resposta ao tentar ver a postagem completa sem estar cadastrado
+router.get("/cadastre-se", (req, res)=>{
+    res.render("usuarios/resposta")
+})
+
+//rota para cadastro
 router.get("/cadastro", (req, res)=>{
     res.render("usuarios/cadastro")
 })
@@ -88,23 +96,38 @@ router.post("/cadastro", (req, res)=>{
     }
 })
 
+//rota para login
+require("../config/auth")
+const passport = require("passport")
+
 router.get("/login", (req, res)=>{
     res.render("usuarios/login")
 })
-require("../config/auth")
-const passport = require("passport")
 router.post("/login", (req, res, next)=>{
-    passport.authenticate("local", {
-        successRedirect: "/user",  //rota que eu quero que ele vá se a autenticação for bem sucedida
-        failureRedirect: "/user/login", //rota que eu quero que ele vá se a autenticação falhar
-        failureFlash: true
+    passport.authenticate("local", (err, user, info)=> {
+        if (err) {
+            return next(err);
+        }
+        if (!user) {
+            // Se a autenticação falhar, redireciona para a página de login com uma mensagem de erro
+            return res.redirect("/user/login");
+        }
+        req.logIn(user, (err) => {
+            if (err) {
+                return next(err);
+            }
+            // Verifica o campo eAdmin do usuário para determinar o redirecionamento
+            if (user.eAdmin === 1) {
+                return res.redirect("/admin/postagens");
+            } else {
+                return res.redirect("/user");
+            }
+        });
     })(req, res, next)
 })
 
 
-
-
-//rota para renderizar as postagens
+//rota para renderizar a vizualização completa das postagens
 router.get("/postagens", (req, res)=>{
     Postagens.find().populate("categoria").sort({data: "desc"}).lean().then((postagens)=>{
         res.render("usuarios/postagens", {postagens: postagens})
