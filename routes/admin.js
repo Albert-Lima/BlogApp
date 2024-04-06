@@ -111,11 +111,12 @@ router.post("/postagens/edit", eAdmin,(req, res)=>{
     })
 })
 //Rota para deletar postagens(forma não segura)
-router.get("/postagens/delete/:id",eAdmin, (req, res)=>{
+router.get("/postagens/delete/:id", (req, res)=>{
     Postagens.findOneAndDelete({_id: req.params.id}).lean().then(()=>{
         req.flash("success_msg", "postagem deletada")
         res.redirect("/admin/postagens")
     }).catch((err)=>{
+        console.log("houve um erro: "+err)
         req.flash("error_msg", "erro ao deletar postagem")
         res.redirect("/admin/postagens")
     })

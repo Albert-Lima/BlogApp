@@ -25,6 +25,9 @@ router.get("/", (req, res)=>{
 router.get("/cadastre-se", (req, res)=>{
     res.render("usuarios/resposta")
 })
+router.get("/sobre", (req, res)=>{
+    res.render("usuarios/about")
+})
 
 //rota para cadastro
 router.get("/cadastro", (req, res)=>{
