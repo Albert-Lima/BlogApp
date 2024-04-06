@@ -1,4 +1,12 @@
 {{>_navbarglobal}}
+
+<section class="BoxLogo" style="margin-top: 100px;">
+    <div class="Logo">EcoMercado <br> Global</div>
+    <div class="linhaVerticalLogo"></div>
+    <div class="LogoMarca">
+        “Conectando você ao pulsar do mundo financeiro”
+    </div>
+</section>
 {{#each erros}}
     <div class="ErrorMSG">
         {{texto}}
@@ -7,22 +15,33 @@
 {{/each}}
 {{>_msg}}
 
-<section class="Container-form" style="margin-top: 100px;">
-    <h3>crie sua conta:</h3>
-    <form action="" method="post" class="formCategoria">
-        <label for="nome">nome</label>
-        <input type="text" name="nome">
-
-        <label for="email">email</label>
-        <input type="email" name="email">
-
-        <label for="senha">senha</label>
-        <input type="password" name="senha">
-
-        <label for="repita">repita sua senha</label>
-        <input type="password" name="senha2">
-
-        <button type="submit">criar</button>
+<section class="section-form" style="margin-top: 50px; margin-bottom: 100px;">
+    <h3>crie sua conta</h3>
+    <form action="/user/cadastro" method="post" class="form-cad">
+        <div class="box-input">
+            <div class="box-icon">
+                <img src="/css/img/icons8-usuário-96.png" alt="icone de usuário">
+            </div>
+            <input type="text" name="nome" class="input-form" placeholder="nome">
+        </div>
+        <div class="box-input">
+            <div class="box-icon">
+                <img src="/css/img/icons8-nova-mensagem-100.png" alt="icone de email">
+            </div>
+            <input type="email" name="email" class="input-form" placeholder="email">
+        </div>
+        <div class="box-input">
+            <div class="box-icon">
+                <img src="/css/img/icons8-senha-100.png" alt="icone de senha">
+            </div>
+            <input type="password" name="senha" class="input-form" placeholder="senha">
+        </div>
+        <div class="box-input">
+            <div class="box-icon">
+                <img src="/css/img/icons8-senha-100.png" alt="icone de senha">
+            </div>
+            <input type="password" name="senha2" class="input-form" placeholder="confirme sua senha">
+        </div>
+        <button type="submit" class="button-form">criar</button>
     </form>
 </section>
-<script src=""></script>

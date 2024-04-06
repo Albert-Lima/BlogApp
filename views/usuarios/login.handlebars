@@ -1,14 +1,12 @@
-<nav class="BarNav">
-    <div class="NavPage1">
-        <a href="/" class="NoSelected">Página inicial</a>
-        <a href="" class="NoSelected">Calculadora</a>
+{{>_navbarglobal}}
+<section class="BoxLogo" style="margin-top: 100px;">
+    <div class="Logo">EcoMercado <br> Global</div>
+    <div class="linhaVerticalLogo"></div>
+    <div class="LogoMarca">
+        “Conectando você ao pulsar do mundo financeiro”
+        <a href="/user/cadastro" class="buttonCadastre">Cadastre-se</a>
     </div>
-    <div class="NavSocial">
-        <a href="#" class="iconSocial"><img src="/css/img/btt-instagram.png" alt=""></a>
-        <a href="#" class="iconSocial"><img src="/css/img/icon_facebook.png" alt=""></a>
-        <a href="#" class="iconSocial"><img src="/css/img/twitter.png" alt=""></a>
-    </div>
-</nav>
+</section>
 <!-- mensagens de erro aparecerão aqui -->
 {{#if error}}
     <div class="ErrorMSG">
@@ -25,14 +23,21 @@
 {{/each}}
 
 
-<section class="Container-form" style="margin-top: 200px;">
-    <form method="post" action="/user/login" class="formCategoria">
-        <label for="email">email</label>
-        <input type="email" name="email" id="" required>
+<section class="section-form" style="margin-top: 50px;">
+    <form method="post" action="/user/login" class="form-cad">
+        <div class="box-input">
+            <div class="box-icon">
+                <img src="/css/img/icons8-nova-mensagem-100.png" alt="icone de email">
+            </div>
+            <input type="email" name="email" required class="input-form" placeholder="email">
+        </div>
+        <div class="box-input">
+            <div class="box-icon">
+                <img src="/css/img/icons8-senha-100.png" alt="icone de senha">
+            </div>
+            <input type="password" name="senha" required class="input-form" placeholder="senha">
+        </div>
 
-        <label for="senha">senha</label>
-        <input type="password" name="senha" required>
-
-        <button type="submit">login</button>
+        <button type="submit" class="button-form">login</button>
     </form>
 </section>

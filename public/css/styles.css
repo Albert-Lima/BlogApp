@@ -14,6 +14,8 @@
     --cor-BlueLight: #000063;
     --fontBase: 'Roboto', sans-serif;
 }
+
+/*estilos logoMarca*/
 .TitleGray{
     color: var(--cor-DarkTitle);
     text-decoration: none;
@@ -89,6 +91,8 @@
     font-size: 10pt;
     font-weight: 100;
 }
+
+/*estilos postagens principal*/
 .Title{
     font-family: var(--fontBase);
     color: #000063;
@@ -169,6 +173,82 @@
 .Button-see-more:hover{
     background-color: black;
 }
+
+/*estilos de formulário*/
+.section-form{
+    width: 400px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    gap: 30px;
+}
+@media (max-width: 420px){
+    .section-form{
+        width: 90%;
+    }
+}
+.section-form h3{
+    font-family: var(--fontBase);
+}
+.form-cad{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    gap: 25px;
+    width: 100%;
+}
+.box-input{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 3%;
+    width: 100%;
+}
+.box-icon{
+    background-color: #000042;
+    height: 40px;
+    width: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+}
+.box-icon img{
+    height: 20px;
+    width: max-content;
+    filter: invert(1);
+}
+.input-form{
+    outline: transparent;
+    border: none;
+    border-bottom: 1px var(--cor-DarkParag) solid;
+    width: 80%;
+    height: 100%;
+    font-family: var(--fontBase);
+}
+.button-form{
+    width: calc(100% - 5%);
+    height: 40px;
+    margin: auto;
+    font-family: var(--fontBase);
+    background-color: var(--cor-BlueMedium);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.button-form:hover{
+    background-color: var(--cor-BlueLight);
+}
+
+
 footer{
     width: 100%;
     height: 350px;
