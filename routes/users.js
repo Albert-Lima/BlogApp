@@ -9,11 +9,12 @@ const Usuarios = mongoose.model("usuarios")
 
 //recebendo model de postagens
 require("../modules/postagem")
-const Postagens = mongoose.model("usuarios")
+const Postagens = mongoose.model("postagens")
 
 //rota principal após login como usuário
-router.get("/", (req, res)=>{
-    Postagens.find().populate().sort({data: "desc"}).lean().then((postagens)=>{
+const {eUser} = require("../helpers/eUser")
+router.get("/home", eUser, (req, res)=>{
+    Postagens.find().populate().sort({data: "desc"}).limit(5).lean().then((postagens)=>{
         res.render("usuarios/home", {postagens: postagens})
      }).catch((err)=>{
         req.flash("error_msg", "houve um erro interno")
@@ -21,7 +22,7 @@ router.get("/", (req, res)=>{
      })
 })
 
-//resposta ao tentar ver a postagem completa sem estar cadastrado
+//rotas de resposta para informar o usuário
 router.get("/cadastre-se", (req, res)=>{
     res.render("usuarios/resposta")
 })
@@ -53,20 +54,16 @@ router.post("/cadastro", (req, res)=>{
     if(erros.length > 0){
         res.render("usuarios/cadastro", {erros: erros})
     }else{
-        //fazendo verificação se o email já consta no banco de dados
         Usuarios.findOne({email: req.body.email}).lean().then((usuarios)=>{
             if(usuarios){
                 req.flash("error_msg", "email já cadastrado!")
                 req.redirect("/user/cadastro")
             }else{
-
                 const novoUsuario = new Usuarios({
                     nome: req.body.nome,
                     email: req.body.email,
                     senha: req.body.senha
                 })
-
-                //encripitando a senha
                 bcrypt.genSalt(10, (erro, salt)=>{
                     bcrypt.hash(novoUsuario.senha, salt, (erro, hash)=>{
                         if(erro){
@@ -77,16 +74,10 @@ router.post("/cadastro", (req, res)=>{
                             novoUsuario.save().then(()=>{
                                 console.log("cadastro realizado")
                                 req.flash("success_msg", "usuário cadastrado")
-                                req.login(usuario, err => {
-                                    if (err) {
-                                        console.error(err);
-                                        return next(err);
-                                    }
-                                    return res.redirect('/'); // Redirecionar para a página de logado
-                                });
+                                res.redirect("/user/home")
                             }).catch((err)=>{
                                 req.flash("error_msg","houve um erro ao criar novo usuário")
-                                res.redirect("/cadastro")
+                                res.redirect("/user/cadastro")
                             })
                         }
                     })
@@ -103,6 +94,13 @@ router.post("/cadastro", (req, res)=>{
 require("../config/auth")
 const passport = require("passport")
 
+router.get("/logout", (req, res)=>{
+    req.logout((err)=>{
+        console.log(err)
+    })//fará o logout automaticamente
+    req.flash("success_msg", "deslogado com sucesso")
+    res.redirect("/")
+})
 router.get("/login", (req, res)=>{
     res.render("usuarios/login")
 })
@@ -121,9 +119,9 @@ router.post("/login", (req, res, next)=>{
             }
             // Verifica o campo eAdmin do usuário para determinar o redirecionamento
             if (user.eAdmin === 1) {
-                return res.redirect("/admin/postagens");
+                return res.redirect("/admin/home");
             } else {
-                return res.redirect("/user");
+                return res.redirect("/user/home");
             }
         });
     })(req, res, next)
@@ -131,14 +129,21 @@ router.post("/login", (req, res, next)=>{
 
 
 //rota para renderizar a vizualização completa das postagens
-router.get("/postagens", (req, res)=>{
+router.get("/postagem", eUser, (req, res)=>{
     Postagens.find().populate("categoria").sort({data: "desc"}).lean().then((postagens)=>{
-        res.render("usuarios/postagens", {postagens: postagens})
+        res.render("usuarios/postagem", {postagens: postagens})
     }).catch((err)=>{
         req.flash('error_msg', 'erro ao listar postagens')
     })
 })
-
-
+router.get("/postagem/:id", eUser, (req, res)=>{
+    Postagens.findOne({_id: req.params.id}).lean().then((postagens)=>{
+        res.render("usuarios/see_post", {postagens: postagens})
+    }).catch((err)=>{
+        console.log("houve um erro: "+err)
+        req.flash("error_msg", "erro ao mostrar postagem")
+        res.redirect("/admin/postagens")
+    })
+})
 
 module.exports = router

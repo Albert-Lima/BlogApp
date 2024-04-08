@@ -1,4 +1,5 @@
 const express = require('express')
+const app = express()
 const router = express.Router()
 const mongoose = require('mongoose')
 
@@ -17,7 +18,7 @@ const Postagens = mongoose.model('postagens')
 
 
 //Rota para a página principal do admin:
-router.get("/", eAdmin,(req, res)=>{
+router.get("/home", eAdmin ,(req, res)=>{
     Postagens.find().populate().sort({data: "desc"}).limit(5).lean().then((postagens)=>{
         res.render("admin/home", {postagens: postagens})
      }).catch((err)=>{
@@ -147,11 +148,23 @@ router.get('/categorias/nova', function(req, res){
 })
 
 //rota para renderizar as postagens
+router.get("/home", (req, res)=>{
+    res.render("admin/home")
+})
 router.get("/postagens", (req, res)=>{
     Postagens.find().populate("categoria").sort({data: "desc"}).lean().then((postagens)=>{
         res.render("admin/postagens", {postagens: postagens})
     }).catch((err)=>{
         req.flash('error_msg', 'erro ao listar postagens')
+    })
+})
+router.get("/postagem/:id", (req, res)=>{
+    Postagens.findOne({_id: req.params.id}).lean().then((postagens)=>{
+        res.render("admin/see_post", {postagens: postagens})
+    }).catch((err)=>{
+        console.log("houve um erro: "+err)
+        req.flash("error_msg", "erro ao mostrar postagem")
+        res.redirect("/admin/postagens")
     })
 })
 //rota para renderizar a página de ediçção das postagens
@@ -164,6 +177,7 @@ router.get("/postagens/nova", (req, res)=>{
     })
 })
 //rota que vai receber os dados de postagem e salavar no banco de dados
+app.use(express.static('public'))
 const path = require('path')
 const multer = require('multer')
 const storage = multer.diskStorage({
@@ -184,8 +198,9 @@ router.post("/postagens/nova", upload.single('imagem'), (req, res)=>{
     if(erros.length > 0){
         res.render("admin/postagensnova", {erros: erros})
     }else{
+        const imagemName = path.basename(req.file.path)
         const novaPostagem = {
-            imagem: req.file.path,
+            imagem: imagemName,
             titulo: req.body.titulo,
             descricao: req.body.descricao,
             conteudo: req.body.conteudo,
@@ -193,7 +208,7 @@ router.post("/postagens/nova", upload.single('imagem'), (req, res)=>{
             slug: req.body.slug
         }
         new Postagens(novaPostagem).save().then(()=>{
-            console.log("cadastro realizado")
+            console.log("postagem criada")
             req.flash("success_msg", "postagem criada")
             res.redirect("/admin/postagens")
         }).catch((err)=>{
