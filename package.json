@@ -15,10 +15,14 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "build": "netlify deploy --prod"
   },
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependences":{
+    "express": "^4.17.1",
+    "netlify-cli": "^2.0.15",
+    "serversless-http": "^2.7.0"
+  }
 }
